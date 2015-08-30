@@ -468,11 +468,11 @@ if $WITH_BOOST ; then
     if ! $BOOST_INSTALLED ; then
         user_eval "cd '${BASE_DIR}/Boost';
                    echo 'Decompressing archive...';
-                   tar -xkzf boost_1_54_0.tar.gz;
-                   cd boost_1_54_0;
+                   tar -xkzf boost_1_59_0.tar.gz;
+                   cd boost_1_59_0;
                    ./bootstrap.sh --prefix='${INSTALL_DIR}';"
-        BOOST_TOOLSET=`grep -o -m1 'using.\+' "${BASE_DIR}/Boost/boost_1_54_0/project-config.jam" | sed 's/using[ \t]\+\([^ \t]\+\).*/\1/'`
-        user_eval "cd '${BASE_DIR}/Boost/boost_1_54_0';
+        BOOST_TOOLSET=`grep -o -m1 'using.\+' "${BASE_DIR}/Boost/boost_1_59_0/project-config.jam" | sed 's/using[ \t]\+\([^ \t]\+\).*/\1/'`
+        user_eval "cd '${BASE_DIR}/Boost/boost_1_59_0';
                    if [[ '$BOOST_TOOLSET' = darwin ]] ; then
                        ./bjam $NUM_PROCS darwin/cxxflags=-fno-strict-aliasing install;
                    elif [[ '$BOOST_TOOLSET' = gcc ]] ; then
@@ -658,8 +658,8 @@ if $WITH_CGAL ; then
     else
         user_eval "cd '${BASE_DIR}/CGAL';
                    echo 'Decompressing archive...';
-                   unzip -unq CGAL-3.9.zip;
-                   cd CGAL-3.9;
+                   unzip -unq CGAL-4.6.2.zip;
+                   cd CGAL-4.6.2;
                    cmake -DCGAL_CXX_FLAGS='-DCGAL_CFG_NO_CPP0X_ARRAY -DCGAL_CFG_NO_TR1_ARRAY' -DCMAKE_PREFIX_PATH='${INSTALL_DIR}' -DCMAKE_INSTALL_PREFIX='${INSTALL_DIR}' .;
                    make $NUM_PROCS install;
                    cd '${BASE_DIR}'"
@@ -1017,6 +1017,7 @@ if $WITH_OPTPP ; then
         user_eval "cd '${BASE_DIR}/OPT++';
                   tar -xkzf optpp-2.4.tar.gz;
                   cd optpp-2.4;
+                  patch -N -F 0 newmat11/precisio.h ../Patches/newmat11/precisio.h.patch;
                   ./configure --prefix='${INSTALL_DIR}' --includedir='${INSTALL_DIR}'/include/OPT++ --with-pic;
                   make $NUM_PROCS install;
                   cd '${BASE_DIR}'";
