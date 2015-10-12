@@ -454,7 +454,10 @@ if $WITH_BOOST ; then
     elif $USE_ROOT ; then
         case "$DISTRO" in
             debian )
-                if (apt-get install libboost-dev || apt-get install libboost1.43-dev || apt-get install libboost1.42-dev || apt-get install libboost1.41-dev || apt-get install libboost1.40-dev || apt-get install libboost1.39-dev || apt-get install libboost1.38-dev) ; then
+                if (apt-get install libboost-all-dev) ; then
+                    BOOST_INSTALLED=true
+                elif (apt-get install libboost-dev || apt-get install libboost1.43-dev || apt-get install libboost1.42-dev || apt-get install libboost1.41-dev || apt-get install libboost1.40-dev || apt-get install libboost1.39-dev || apt-get install libboost1.38-dev) ; then
+                    apt-get install libboost-filesystem-dev || apt-get install libboost-filesystem1.43-dev || apt-get install libboost-filesystem1.42-dev || apt-get install libboost-filesystem1.41-dev || apt-get install libboost-filesystem1.40-dev || apt-get install libboost-filesystem1.39-dev || apt-get install libboost-filesystem1.38-dev
                     apt-get install libboost-program-options-dev || apt-get install libboost-program-options1.43-dev || apt-get install libboost-program-options1.42-dev || apt-get install libboost-program-options1.41-dev || apt-get install libboost-program-options1.40-dev || apt-get install libboost-program-options1.39-dev || apt-get install libboost-program-options1.38-dev
                     apt-get install libboost-regex-dev || apt-get install libboost-regex1.43-dev || apt-get install libboost-regex1.42-dev || apt-get install libboost-regex1.41-dev || apt-get install libboost-regex1.40-dev || apt-get install libboost-regex1.39-dev || apt-get install libboost-regex1.38-dev
                     apt-get install libboost-system-dev || apt-get install libboost-system1.43-dev || apt-get install libboost-system1.42-dev || apt-get install libboost-system1.41-dev || apt-get install libboost-system1.40-dev || apt-get install libboost-system1.39-dev || apt-get install libboost-system1.38-dev
