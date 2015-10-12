@@ -656,6 +656,14 @@ if $WITH_CGAL ; then
     if [[ -n "$INSTALLED_CGAL" ]] ; then
         make_symlink $INSTALLED_CGAL "${INSTALL_DIR}/installed-cgal"
     else
+        if $USE_ROOT ; then
+            case "$DISTRO" in
+                debian )
+                    apt-get install libgmp-dev libmpfr-dev
+                    ;;
+            esac
+        fi
+
         user_eval "cd '${BASE_DIR}/CGAL';
                    echo 'Decompressing archive...';
                    unzip -unq CGAL-4.6.2.zip;
